@@ -23,6 +23,10 @@
       "dom"
     ],
     "useDefineForClassFields": false,
+    "types": [
+      "jest"
+    ],
+    "esModuleInterop": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
