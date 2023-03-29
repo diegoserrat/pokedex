@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges,  SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,15 +10,17 @@ import { CommonModule } from '@angular/common';
   ],
   styleUrls: ['./list.component.scss'],
   template: `
-    <div class="">
-
-    </div>
+    <ul *ngFor="let pokemon of list">
+      <li>{{pokemon | json}}</li>
+    </ul>
   `
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnChanges {
 
   @Input() list: any = [];
 
-  ngOnInit(): void {}
+  ngOnChanges(changes: SimpleChanges): void {
+    this.list = changes['list'].currentValue
+  }
 
 }
