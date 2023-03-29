@@ -7,10 +7,10 @@ import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    BrowserAnimationsModule,
-    SharedModule,
-    CoreRoutingModule
+    // CommonModule,
+    // BrowserAnimationsModule,
+    // SharedModule,
+    // CoreRoutingModule
   ],
   providers: [],
 })
