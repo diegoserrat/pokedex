@@ -22,6 +22,7 @@
     "@angular/router": "^15.2.4",
     "@ngrx/store": "^15.4.0",
     "bootstrap": "^4.0.0",
+    "bootstrap-icons": "^1.10.3",
     "jquery": "^3.6.4",
     "popper.js": "^1.16.1",
     "rxjs": "~7.5.0",
@@ -42,7 +43,7 @@
   "jest": {
     "preset": "jest-preset-angular",
     "setupFilesAfterEnv": [
-        "<rootDir>/setup.jest.ts"
+      "<rootDir>/setup.jest.ts"
     ],
     "testPathIgnorePatterns": [
       "<rootDir>/node_modules/",
