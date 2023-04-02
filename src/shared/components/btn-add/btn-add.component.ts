@@ -28,7 +28,6 @@ export class BtnAddComponent {
 
   constructor(private modalService: NgbModal) {}
 
-
   openModalComentary() {
     const modalRef = this.modalService.open(AddCommentaryComponent, {
       backdrop: false,

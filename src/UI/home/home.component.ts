@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { finalize, forkJoin, merge, mergeMap } from 'rxjs';
+import { finalize } from 'rxjs';
 import { PokemonService } from 'src/core/services/pokemon.service';
 import { AppState } from 'src/core/store/app.state';
 import { ListComponent } from 'src/shared/components/list/list.component';
@@ -9,7 +9,7 @@ import { SharedModule } from 'src/shared/shared.module';
 import { PokemonsArray } from '../../shared/models/results-pokemon';
 import { PokemonsList } from '../../shared/models/pokemons-list';
 import { PaginationComponent } from 'src/shared/components/pagination/pagination.component';
-import { commentary, favorite } from '../../core/store/actions/app.actions';
+import { favoriteOrComment } from '../../core/store/actions/app.actions';
 
 @Component({
     selector: 'app-home',
@@ -95,7 +95,7 @@ export class HomeComponent implements OnInit {
               this.oldList = [ ...this.oldList, ...this.list ];
               const withoutDuplicates = this.oldList.filter((value, index, self) => index === self.findIndex((t) => ( t.id === value.id )));
 
-              this.store.dispatch(favorite.updateFavorite({content: withoutDuplicates}));
+              this.store.dispatch(favoriteOrComment.addFavoriteorcomment({content: withoutDuplicates}));
             }
           }
         })

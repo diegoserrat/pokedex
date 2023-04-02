@@ -6,7 +6,7 @@ import { BtnAddComponent } from '../btn-add/btn-add.component';
 import { BtnRemoveComponent } from '../btn-remove/btn-remove.component';
 import { FavoriteComponent } from '../favorite/favorite.component';
 import { AppState} from '../../../core/store/app.state';
-import { favorite } from './../../../core/store/actions/app.actions';
+import { favoriteOrComment } from './../../../core/store/actions/app.actions';
 import { PokemonsList } from 'src/shared/models/pokemons-list';
 
 @Component({
@@ -36,7 +36,9 @@ import { PokemonsList } from 'src/shared/models/pokemons-list';
               <pkm-btn-add
                 [text]="'Adicionar comentário'"
                 [pokemon]="pokemon"/>
-              <pkm-btn-remove [text]="'Excluír comentário'" />
+              <pkm-btn-remove
+                [text]="'Excluír comentário'"
+                [pokemon]="pokemon"/>
             </div>
           </div>
           <div id="favorite">
@@ -71,6 +73,6 @@ export class ListComponent implements OnChanges {
       }
     });
 
-    this.store.dispatch(favorite.addFavorite({content: this.pokemonsListFavorite}));
+    this.store.dispatch(favoriteOrComment.updateFavoriteorcomment({content: this.pokemonsListFavorite}));
   }
 }

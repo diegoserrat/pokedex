@@ -6,7 +6,7 @@ import { PokemonsList } from '../../models/pokemons-list';
 import { FormControl, FormGroup } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/core/store/app.state';
-import { favorite } from 'src/core/store/actions/app.actions';
+import { favoriteOrComment } from 'src/core/store/actions/app.actions';
 
 @Component({
   selector: 'pkm-add-commentary',
@@ -57,7 +57,7 @@ export class AddCommentaryComponent implements OnInit {
     this.store.pipe(select('app')).subscribe( s => this.pokemonsList = s.pokemonsList);
   }
   save() {
-    const { name, commentary } = this.form.value;
+    const { commentary } = this.form.value;
 
     this.pokemonsList.forEach((pokemon: PokemonsList) => {
       if(pokemon.id === this.id) {
@@ -66,7 +66,7 @@ export class AddCommentaryComponent implements OnInit {
       }
     });
 
-    this.store.dispatch(favorite.addFavorite({content: this.pokemonsList}));
+    this.store.dispatch(favoriteOrComment.updateFavoriteorcomment({content: this.pokemonsList}));
     this.activeModal.close()
   }
 }

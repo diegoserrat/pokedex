@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { SharedModule } from '../../shared.module';
+import { PokemonsList } from 'src/shared/models/pokemons-list';
+import { RemoveCommentaryComponent } from '../../modals/remove-commentary/remove-commentary.component';
 
 @Component({
   selector: 'pkm-btn-remove',
@@ -9,7 +12,10 @@ import { SharedModule } from '../../shared.module';
     SharedModule
   ],
   template: `
-    <button type="button" class="btn btn-danger rounded-pill ml-2 mr-2 text-dark">
+    <button
+      type="button"
+      class="btn btn-danger rounded-pill ml-2 mr-2 text-dark"
+      (click)="openModalRemoveComentary()">
       <small> {{text}} </small>
     </button>
   `,
@@ -17,6 +23,20 @@ import { SharedModule } from '../../shared.module';
 })
 export class BtnRemoveComponent {
 
-  @Input() text = 'default'
+  @Input() text = 'default';
+  @Input() pokemon: PokemonsList = { id: 0, commentary: '', favorite: false, name: '', photoUrl: ''};
+
+  constructor(private modalService: NgbModal) {}
+
+  openModalRemoveComentary() {
+    const modalRef = this.modalService.open(RemoveCommentaryComponent, {
+      backdrop: false,
+      centered: true,
+      modalDialogClass: 'bg-light rounded',
+      size: 'lg'
+    });
+    modalRef.componentInstance.pokemon = this.pokemon;
+  }
+
 
 }
