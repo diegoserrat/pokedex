@@ -1,54 +1,54 @@
-export interface IPokemon {
-  abilities: IAbilities[],
+export interface Pokemon {
+  abilities: Abilities[],
   base_experience: number,
   height: number,
   held_items: [],
   is_default: boolean,
   location_area_encounters: string,
-  moves: IMovies[],
+  moves: Movies[],
   name: string,
   order: number,
   past_types: [],
-  species: IVersion[],
+  species: Version[],
   sprites: any,
-  stats: IStats[],
-  types: ITypes[],
+  stats: Stats[],
+  types: Types[],
   weight: number
 }
 
-export interface IAbilities {
-  abilitie: IVersion[],
+export interface Abilities {
+  abilitie: Version[],
   is_hidden: boolean,
   slot: number
 }
 
 export interface IGameIndicies {
   game_index: number,
-  version: IVersion[],
+  version: Version[],
 }
 
-export interface IMovies {
-  movie: IVersion[],
+export interface Movies {
+  movie: Version[],
   version_group_details: []
 }
 
 export interface IVersionGroupDetails {
   level_learned_at: number,
-  move_learn_method: IVersion[]
+  move_learn_method: Version[]
 }
 
-export interface IStats {
+export interface Stats {
   base_stat: number,
   effort: number,
-  stat: IVersion[]
+  stat: Version[]
 }
 
-export interface ITypes {
+export interface Types {
   slot: number,
-  type: IVersion[]
+  type: Version[]
 }
 
-export interface IVersion {
+export interface Version {
   name: string,
   url: string
 }

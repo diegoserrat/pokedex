@@ -9,7 +9,7 @@ import { SharedModule } from '../../shared.module';
     SharedModule
   ],
   template: `
-    <button type="button" class="btn btn-danger rounded-pill ml-2 mr-2">
+    <button type="button" class="btn btn-danger rounded-pill ml-2 mr-2 text-dark">
       <small> {{text}} </small>
     </button>
   `,

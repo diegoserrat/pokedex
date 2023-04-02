@@ -1,4 +1,5 @@
-export interface IPokemonsArray {
+export interface PokemonsArray {
   name: string;
   url: string;
+  id: number
 }

@@ -1,8 +1,8 @@
-import { IPokemonsArray } from './results-pokemon';
+import { PokemonsArray } from './results-pokemon';
 
-export interface IPokemons {
+export interface Pokemons {
   count: number;
   next: string;
   previous: string | null,
-  results: IPokemonsArray[]
+  results: PokemonsArray[]
 }

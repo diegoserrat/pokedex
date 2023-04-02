@@ -1,66 +1,121 @@
 import { Component, OnInit } from '@angular/core';
-import { finalize } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { finalize, forkJoin, merge, mergeMap } from 'rxjs';
 import { PokemonService } from 'src/core/services/pokemon.service';
+import { AppState } from 'src/core/store/app.state';
 import { ListComponent } from 'src/shared/components/list/list.component';
 
 import { SharedModule } from 'src/shared/shared.module';
-import { IPokemonsArray } from '../../shared/models/results-pokemon';
-import { IPokemonsList } from './models/pokemons-list';
+import { PokemonsArray } from '../../shared/models/results-pokemon';
+import { PokemonsList } from '../../shared/models/pokemons-list';
+import { PaginationComponent } from 'src/shared/components/pagination/pagination.component';
+import { commentary, favorite } from '../../core/store/actions/app.actions';
 
 @Component({
     selector: 'app-home',
     standalone: true,
     imports: [
       SharedModule,
-      ListComponent
+      ListComponent,
+      PaginationComponent
     ],
     providers: [
       PokemonService
     ],
     template: `
-      <pkm-list [list]="list"></pkm-list>
+      <div class="content">
+        <pkm-list
+          [listItem]="list"
+          [page]="page"
+          />
+        <pkm-pagination
+          [collectionSize]="collectionSize"
+          (page)="pagination($event)"
+          [pageList]="pageList"/>
+      </div>
     `
   })
 
 export class HomeComponent implements OnInit {
 
-  pokemonsList: IPokemonsArray[] = [];
-  list: IPokemonsList[] = [];
+  pokemonsList: PokemonsArray[] = [];
+  list: PokemonsList[] = [];
+  oldList: PokemonsList[] = [];
 
-  constructor(private pokemonService: PokemonService) {}
+  collectionSize = 0;
+  pageList = [1];
+  page = 1;
+
+  constructor(
+    private pokemonService: PokemonService,
+    private store: Store<{app: AppState}>) {}
 
   ngOnInit(): void {
     this.getPokemonList();
   }
 
-  getPokemonList() {
-    this.pokemonService.getPokemons()
+  getPokemonList(offset = 0, limit = 10) {
+    this.pokemonService.getPokemons(offset, limit)
         .pipe(finalize(() => this.getPokemon() ))
         .subscribe({
           next: pokemons => {
+            this.collectionSize = pokemons.count;
+
+            pokemons.results.forEach( pokemon => {
+              pokemon.id = this.idPokemon(pokemon.url)
+            })
             this.pokemonsList = pokemons.results;
           }
         })
   }
 
-  getPokemon() {
-    this.pokemonsList.forEach( pokemon => {
-      this.pokemonService.getPokemon(this.idPokemon(pokemon.url))
+   getPokemon() {
+    this.pokemonsList.forEach( (pokemon, index, array ) => {
+      this.pokemonService.getPokemon(pokemon.id)
         .subscribe({
           next: pkm => {
             this.list.push({
-              id: this.idPokemon(pokemon.url),
+              id: pokemon.id,
               name: pokemon.name,
-              photoUrl: pkm.sprites.other.home.front_default
+              photoUrl: pkm.sprites.other.home.front_default,
+              favorite: false,
+              commentary: ''
             });
+
+            if (index === array.length -1 ){
+              this.oldList.forEach((pokemon: any) =>{
+                this.list.forEach( pkm => {
+                  if (pokemon.id === pkm.id) {
+                    pkm.favorite = pokemon.favorite;
+                    pkm.commentary = pokemon.commentary
+                  }
+                })
+              })
+
+              this.oldList = [ ...this.oldList, ...this.list ];
+              const withoutDuplicates = this.oldList.filter((value, index, self) => index === self.findIndex((t) => ( t.id === value.id )));
+
+              this.store.dispatch(favorite.updateFavorite({content: withoutDuplicates}));
+            }
           }
         })
     })
   }
 
-  idPokemon(url: string): string {
+  idPokemon(url: string): number {
     const id = new URL(url);
-    return id.pathname.split('/')[4];
+    return Number(id.pathname.split('/')[4]);
   }
 
+  pagination(page: number) {
+    this.page = page;
+    this.list = [];
+    let offset = 0;
+
+    if ( page === 1 ) offset =  0
+    if ( page === 2 ) offset = 10
+    if ( page >= 3 ) offset = page * 10 - 10
+
+    this.getPokemonList(offset, 10);
+  }
 }

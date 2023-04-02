@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { SharedModule } from '../../shared.module';
 
@@ -9,7 +9,7 @@ import { SharedModule } from '../../shared.module';
     SharedModule
   ],
   template: `
-    <div class="d-flex justify-content-center" id="favorite">
+    <div class="d-flex justify-content-center favorite">
       <div *ngIf="!favorite; else not_favorite">
         <i class="bi bi-star" id="icon"></i>
       </div>
@@ -21,11 +21,6 @@ import { SharedModule } from '../../shared.module';
   `,
   styleUrls: ['./favorite.component.scss']
 })
-export class FavoriteComponent implements OnChanges {
-
+export class FavoriteComponent {
   @Input() favorite = false;
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes[`favorite`].currentValue);
-  }
 }
