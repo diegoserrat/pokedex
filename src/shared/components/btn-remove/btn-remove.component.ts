@@ -32,8 +32,8 @@ export class BtnRemoveComponent {
     const modalRef = this.modalService.open(RemoveCommentaryComponent, {
       backdrop: false,
       centered: true,
-      modalDialogClass: 'bg-light rounded',
-      size: 'lg'
+      size: 'md',
+      modalDialogClass: 'rounded dialog-class',
     });
     modalRef.componentInstance.pokemon = this.pokemon;
   }
