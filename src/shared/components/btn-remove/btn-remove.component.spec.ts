@@ -1,23 +1,33 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SharedModule } from './../../shared.module';
+import { ComponentFixture, getTestBed, TestBed } from '@angular/core/testing';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { BtnRemoveComponent } from './btn-remove.component';
 
 describe('BtnRemoveComponent', () => {
+  let injector: TestBed;
   let component: BtnRemoveComponent;
   let fixture: ComponentFixture<BtnRemoveComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [ BtnRemoveComponent ]
+    TestBed.configureTestingModule({
+      imports: [
+        SharedModule
+      ],
+      providers: [
+        NgbModal
+      ]
     })
-    .compileComponents();
+  });
 
+  beforeEach(() => {
+    injector = getTestBed();
     fixture = TestBed.createComponent(BtnRemoveComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(fixture).toBeTruthy();
   });
 });

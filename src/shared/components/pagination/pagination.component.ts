@@ -3,7 +3,7 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 
 import { setPagesSearched } from '../../../core/store/actions/app.actions';
-import { AppState } from 'src/core/store/app.state';
+import { AppState } from '../../../core/store/app.state';
 import { SharedModule } from '../../shared.module';
 
 @Component({

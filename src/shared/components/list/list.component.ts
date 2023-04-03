@@ -7,7 +7,7 @@ import { BtnRemoveComponent } from '../btn-remove/btn-remove.component';
 import { FavoriteComponent } from '../favorite/favorite.component';
 import { AppState} from '../../../core/store/app.state';
 import { favoriteOrComment } from './../../../core/store/actions/app.actions';
-import { PokemonsList } from 'src/shared/models/pokemons-list';
+import { PokemonsList } from '../../../shared/models/pokemons-list';
 
 @Component({
   selector: 'pkm-list',

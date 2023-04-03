@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { finalize } from 'rxjs';
-import { PokemonService } from 'src/core/services/pokemon.service';
-import { AppState } from 'src/core/store/app.state';
-import { ListComponent } from 'src/shared/components/list/list.component';
+import { PokemonService } from '../../core/services/pokemon.service';
+import { AppState } from '../../core/store/app.state';
+import { ListComponent } from '../../shared/components/list/list.component';
 
-import { SharedModule } from 'src/shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 import { PokemonsArray } from '../../shared/models/results-pokemon';
 import { PokemonsList } from '../../shared/models/pokemons-list';
-import { PaginationComponent } from 'src/shared/components/pagination/pagination.component';
+import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
 import { favoriteOrComment } from '../../core/store/actions/app.actions';
 
 @Component({

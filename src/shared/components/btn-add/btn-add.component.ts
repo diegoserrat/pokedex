@@ -1,8 +1,8 @@
-import { AddCommentaryComponent } from './../../modals/add-commentary/add-commentary.component';
 import { Component, Input} from '@angular/core';
 import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { SharedModule } from 'src/shared/shared.module';
+import { AddCommentaryComponent } from './../../modals/add-commentary/add-commentary.component';
+import { SharedModule } from '../../shared.module';
 import { PokemonsList } from '../../models/pokemons-list';
 
 @Component({

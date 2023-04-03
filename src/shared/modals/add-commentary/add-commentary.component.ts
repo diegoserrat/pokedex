@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { select, Store } from '@ngrx/store';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { SharedModule } from '../../shared.module';
 import { PokemonsList } from '../../models/pokemons-list';
-import { FormControl, FormGroup } from '@angular/forms';
-import { select, Store } from '@ngrx/store';
-import { AppState } from 'src/core/store/app.state';
-import { favoriteOrComment } from 'src/core/store/actions/app.actions';
+import { AppState } from '../../../core/store/app.state';
+import { favoriteOrComment } from '../../../core/store/actions/app.actions';
 
 @Component({
   selector: 'pkm-add-commentary',

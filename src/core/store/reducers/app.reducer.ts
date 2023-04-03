@@ -1,6 +1,6 @@
-import { setPagesSearched } from './../actions/app.actions';
 import { createReducer, on } from "@ngrx/store";
 
+import { setPagesSearched } from '../actions/app.actions';
 import { favoriteOrComment } from '../actions/app.actions';
 import { appInitialState } from '../app.state';
 
