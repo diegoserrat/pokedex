@@ -53,9 +53,8 @@ export class RemoveCommentaryComponent {
       }
     });
 
-    console.log(this.pokemonsList);
-
     this.store.dispatch(favoriteOrComment.updateFavoriteorcomment({content: this.pokemonsList}));
     this.activeModal.close()
   }
+
 }

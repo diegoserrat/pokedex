@@ -1,10 +1,9 @@
 import { Store } from '@ngrx/store';
-import { combineLatest, of } from 'rxjs';
+import { of } from 'rxjs';
 
 import { HomeComponent } from './home.component';
 import { AppState } from './../../core/store/app.state';
 import { Pokemon, Types, Version, Abilities, Movies, Stats } from '../../shared/interfaces/pokemon';
-import { FilterComponent } from '../../shared/components/filter/filter.component';
 
 const mockPokemonsArray = [{ id: 1, name: 'charizard', url: 'https://pokeapi.co/api/v2/pokemon/1/'}]
 

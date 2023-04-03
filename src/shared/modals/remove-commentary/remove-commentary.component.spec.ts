@@ -5,17 +5,32 @@ import { RemoveCommentaryComponent } from './remove-commentary.component';
 
 describe('RemoveCommentaryComponent', () => {
   let fixture: RemoveCommentaryComponent
-  let activeModal: NgbActiveModal;
-  let store: Store<{app: {
-    pokemonsList: [],
-    pagesSearched: [1]
-  }}>;
+  let activeModalSpy: any;
+  let storeSpy: any
 
   beforeEach(() => {
-    fixture = new RemoveCommentaryComponent(activeModal, store)
+    storeSpy = {
+      dispatch: jest.fn(),
+      pipe: jest.fn()
+    }
+
+    activeModalSpy = {
+      close: jest.fn()
+    }
+
+    fixture = new RemoveCommentaryComponent(activeModalSpy, storeSpy)
+
+    fixture.pokemonsList = [{ id: 1, name: 'charizard', photoUrl: '', favorite: false, commentary: 'test' }];
+    fixture.id = 1;
   });
 
   test('should create', () => {
     expect(fixture).toBeTruthy();
   });
+
+  test('should call save and update pokemonsList', () => {
+    fixture.exclude();
+
+    expect(fixture.pokemonsList[0].commentary).toBe('');
+  })
 });
