@@ -1,17 +1,14 @@
-import { CommonModule } from '@angular/common';
+import { SharedModule } from './../../shared.module';
 import { ComponentFixture, getTestBed, TestBed } from '@angular/core/testing';
-import { Store, StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { BtnAddComponent } from '../btn-add/btn-add.component';
-import { BtnRemoveComponent } from '../btn-remove/btn-remove.component';
-import { FavoriteComponent } from '../favorite/favorite.component';
 
-import { ListComponent } from './list.component';
+import { PaginationComponent } from './pagination.component';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
-describe('ListComponent', () => {
+describe('PaginationComponent', () => {
   let injector: TestBed;
-  let component: ListComponent;
-  let fixture: ComponentFixture<ListComponent>;
+  let component: PaginationComponent;
+  let fixture: ComponentFixture<PaginationComponent>;
 
   let store: MockStore;
   const initialState = {
@@ -22,11 +19,8 @@ describe('ListComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       imports: [
-        CommonModule,
-        ListComponent,
-        BtnAddComponent,
-        BtnRemoveComponent,
-        FavoriteComponent
+        SharedModule,
+        NgbPaginationModule
       ],
       providers: [
         provideMockStore({ initialState }),
@@ -36,7 +30,7 @@ describe('ListComponent', () => {
 
   beforeEach(() => {
     injector = getTestBed();
-    fixture = TestBed.createComponent(ListComponent);
+    fixture = TestBed.createComponent(PaginationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     store = TestBed.inject(MockStore);

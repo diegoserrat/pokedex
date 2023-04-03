@@ -1,17 +1,15 @@
-import { CommonModule } from '@angular/common';
+import { SharedModule } from './../../shared.module';
 import { ComponentFixture, getTestBed, TestBed } from '@angular/core/testing';
-import { Store, StoreModule } from '@ngrx/store';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { BtnAddComponent } from '../btn-add/btn-add.component';
-import { BtnRemoveComponent } from '../btn-remove/btn-remove.component';
-import { FavoriteComponent } from '../favorite/favorite.component';
 
-import { ListComponent } from './list.component';
+import { AddCommentaryComponent } from './add-commentary.component';
 
-describe('ListComponent', () => {
+describe('AddCommentaryComponent', () => {
   let injector: TestBed;
-  let component: ListComponent;
-  let fixture: ComponentFixture<ListComponent>;
+  let component: AddCommentaryComponent;
+  let fixture: ComponentFixture<AddCommentaryComponent>;
 
   let store: MockStore;
   const initialState = {
@@ -22,21 +20,18 @@ describe('ListComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       imports: [
-        CommonModule,
-        ListComponent,
-        BtnAddComponent,
-        BtnRemoveComponent,
-        FavoriteComponent
+        SharedModule,
       ],
       providers: [
         provideMockStore({ initialState }),
+        NgbActiveModal
       ]
     })
   });
 
   beforeEach(() => {
     injector = getTestBed();
-    fixture = TestBed.createComponent(ListComponent);
+    fixture = TestBed.createComponent(AddCommentaryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     store = TestBed.inject(MockStore);

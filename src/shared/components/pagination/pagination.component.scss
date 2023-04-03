@@ -1,0 +1,20 @@
+::ng-deep .page-item:not(:first-child):not(:last-child), .page-item.active .page-link {
+  a {
+    border-radius: 10px;
+    background-color: red !important;
+    color: white;
+    margin-right: 10px;
+    width: 45px;
+    text-align: center;
+  }
+}
+
+::ng-deep .page-item {
+  a {
+    border: none !important;
+  }
+}
+
+::ng-deep .visually-hidden {
+  display: none;
+}
