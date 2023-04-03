@@ -3,7 +3,7 @@ import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AddCommentaryComponent } from './../../modals/add-commentary/add-commentary.component';
 import { SharedModule } from '../../shared.module';
-import { PokemonsList } from '../../models/pokemons-list';
+import { PokemonsList } from '../../interfaces/pokemons-list';
 
 @Component({
   selector: 'pkm-btn-add',

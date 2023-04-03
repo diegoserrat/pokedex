@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
       CommonModule,
       HttpClientModule
     ],
+    providers: [ ],
     template: `
       <router-outlet></router-outlet>
     `

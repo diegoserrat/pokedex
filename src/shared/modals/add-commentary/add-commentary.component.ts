@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { SharedModule } from '../../shared.module';
-import { PokemonsList } from '../../models/pokemons-list';
+import { PokemonsList } from '../../interfaces/pokemons-list';
 import { AppState } from '../../../core/store/app.state';
 import { favoriteOrComment } from '../../../core/store/actions/app.actions';
 

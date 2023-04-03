@@ -6,8 +6,8 @@ import { AppState } from '../../core/store/app.state';
 import { ListComponent } from '../../shared/components/list/list.component';
 
 import { SharedModule } from '../../shared/shared.module';
-import { PokemonsArray } from '../../shared/models/results-pokemon';
-import { PokemonsList } from '../../shared/models/pokemons-list';
+import { PokemonsArray } from '../../shared/interfaces/results-pokemon';
+import { PokemonsList } from '../../shared/interfaces/pokemons-list';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
 import { favoriteOrComment } from '../../core/store/actions/app.actions';
 import { FilterComponent } from './../../shared/components/filter/filter.component';
@@ -19,7 +19,7 @@ import { FilterComponent } from './../../shared/components/filter/filter.compone
       SharedModule,
       ListComponent,
       PaginationComponent,
-      FilterComponent
+      FilterComponent,
     ],
     providers: [
       PokemonService

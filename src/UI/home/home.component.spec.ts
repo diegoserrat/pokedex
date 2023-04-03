@@ -7,8 +7,8 @@ import { PokemonService } from '../../core/services/pokemon.service';
 import { SharedModule } from '../../shared/shared.module';
 import { ListComponent } from '../../shared/components/list/list.component';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
-import { Pokemons } from '../../shared/models/pokemons';
-import { Pokemon } from '../../shared/models/pokemon';
+import { Pokemons } from '../../shared/interfaces/pokemons';
+import { Pokemon } from '../../shared/interfaces/pokemon';
 import { FilterComponent } from './../../shared/components/filter/filter.component';
 
 const mockPokemonsArray = [

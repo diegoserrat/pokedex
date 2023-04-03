@@ -5,7 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { SharedModule } from '../../shared.module';
 import { AppState } from '../../../core/store/app.state';
 import { favoriteOrComment } from '../../../core/store/actions/app.actions';
-import { PokemonsList } from '../../models/pokemons-list';
+import { PokemonsList } from '../../interfaces/pokemons-list';
 
 @Component({
   selector: 'pkm-remove-commentary',

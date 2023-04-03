@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-import { Pokemons } from '../../shared/models/pokemons';
-import { Pokemon } from '../../shared/models/pokemon';
+import { Pokemons } from '../../shared/interfaces/pokemons';
+import { Pokemon } from '../../shared/interfaces/pokemon';
 
 @Injectable({
   providedIn: 'root'

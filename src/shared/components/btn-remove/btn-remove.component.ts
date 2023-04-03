@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { SharedModule } from '../../shared.module';
-import { PokemonsList } from '../../models/pokemons-list';
+import { PokemonsList } from '../../interfaces/pokemons-list';
 import { RemoveCommentaryComponent } from '../../modals/remove-commentary/remove-commentary.component';
 
 @Component({
