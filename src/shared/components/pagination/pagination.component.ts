@@ -15,7 +15,7 @@ import { SharedModule } from '../../shared.module';
   ],
   template: `
     <ngb-pagination
-      class="d-flex justify-content-center "
+      class="d-flex justify-content-center align-items-center pt-2"
       [collectionSize]="collectionSize"
       [boundaryLinks]="false"
       [maxSize]="5"

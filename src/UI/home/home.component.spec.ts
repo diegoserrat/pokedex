@@ -9,6 +9,7 @@ import { ListComponent } from '../../shared/components/list/list.component';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
 import { Pokemons } from '../../shared/models/pokemons';
 import { Pokemon } from '../../shared/models/pokemon';
+import { FilterComponent } from './../../shared/components/filter/filter.component';
 
 const mockPokemonsArray = [
   { id: 1, name: 'test', url: ''}
@@ -37,6 +38,7 @@ describe('HomeComponent', () => {
   let fixture: ComponentFixture<HomeComponent>;
   let pokemonService: PokemonService;
   let store: MockStore;
+
   const initialState = {
     pokemonsList: [],
     pagesSearched: [1]
@@ -47,7 +49,8 @@ describe('HomeComponent', () => {
       imports: [
         SharedModule,
         ListComponent,
-        PaginationComponent
+        PaginationComponent,
+        FilterComponent
       ],
       providers: [
         provideMockStore({ initialState }),

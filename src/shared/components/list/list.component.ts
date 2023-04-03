@@ -21,8 +21,8 @@ import { PokemonsList } from '../../../shared/models/pokemons-list';
   ],
   styleUrls: ['./list.component.scss'],
   template: `
-    <div class="container" class="d-flex flex-column">
-      <ul class="container">
+    <div class="container d-flex flex-column" id="content-list">
+      <ul class="container" *ngIf="listItem?.length; else no_items">
         <li class="d-flex align-items-center bg-primary mb-3 rounded-pill p-2" id="list" *ngFor="let pokemon of listItem">
           <div>
             <img id="list-img" src={{pokemon.photoUrl}}/>
@@ -46,6 +46,11 @@ import { PokemonsList } from '../../../shared/models/pokemons-list';
           </div>
         </li>
       </ul>
+      <ng-template #no_items>
+        <p class="font-weight-normal">
+          Sem itens filtrados.
+        </p>
+      </ng-template>
     </div>
   `
 })

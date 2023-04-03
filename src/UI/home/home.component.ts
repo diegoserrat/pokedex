@@ -10,6 +10,7 @@ import { PokemonsArray } from '../../shared/models/results-pokemon';
 import { PokemonsList } from '../../shared/models/pokemons-list';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
 import { favoriteOrComment } from '../../core/store/actions/app.actions';
+import { FilterComponent } from './../../shared/components/filter/filter.component';
 
 @Component({
     selector: 'app-home',
@@ -17,14 +18,20 @@ import { favoriteOrComment } from '../../core/store/actions/app.actions';
     imports: [
       SharedModule,
       ListComponent,
-      PaginationComponent
+      PaginationComponent,
+      FilterComponent
     ],
     providers: [
       PokemonService
     ],
     template: `
-      <div class="content">
+      <div class="container d-flex flex-column align-items-center">
+        <img src="../../assets/images/pokemon.svg" class="img-fluid w-25 pt-2" alt="Pokémon logo"/>
+        <pkm-filter
+          class="w-100"
+         (searched)="searched($event)"/>
         <pkm-list
+          class="w-100"
           [listItem]="list"
           [page]="page"
           />
@@ -52,6 +59,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPokemonList();
+  }
+
+  searched(event: string) {
+    this.list = this.oldList.filter( pokemon => pokemon.name.includes(event));
   }
 
   getPokemonList(offset = 0, limit = 10) {

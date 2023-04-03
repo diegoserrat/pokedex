@@ -88,6 +88,18 @@
           "options": {
             "browserTarget": "pokedex:build"
           }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "collectCoverage": true,
+            "collectCoverageFrom": ["./src/**"],
+            "coverageThreshold": {
+              "global": {
+                "lines": 90
+              }
+            }
+          }
         }
       }
     }
