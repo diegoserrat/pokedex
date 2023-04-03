@@ -1,3 +1,4 @@
+import { HomeRoutingModule } from './home-routing.module';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { finalize } from 'rxjs';
@@ -11,6 +12,7 @@ import { PokemonsList } from '../../shared/interfaces/pokemons-list';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
 import { favoriteOrComment } from '../../core/store/actions/app.actions';
 import { FilterComponent } from './../../shared/components/filter/filter.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-home',
