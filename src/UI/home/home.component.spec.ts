@@ -1,4 +1,4 @@
-import { Store } from '@ngrx/store';
+import { Store, on } from '@ngrx/store';
 import { of } from 'rxjs';
 
 import { HomeComponent } from './home.component';
@@ -41,15 +41,18 @@ const mockPokemon: Pokemon = {
 describe('HomeComponent', () => {
   let fixture: HomeComponent;
   let mockPokemonService: any;
-  let store: Store<{app: AppState}>;
+  let storeSpy: any;
 
   beforeEach(() => {
     mockPokemonService = {
       getPokemons: jest.fn(),
       getPokemon: jest.fn()
     }
+    storeSpy = {
+      dispatch: jest.fn()
+    }
 
-    fixture = new HomeComponent( mockPokemonService, store );
+    fixture = new HomeComponent( mockPokemonService, storeSpy );
 
     fixture.oldList = [{
       id: 1,
