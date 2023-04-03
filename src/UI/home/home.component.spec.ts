@@ -1,75 +1,108 @@
+import { Store, on } from '@ngrx/store';
+import { of } from 'rxjs';
+
 import { HomeComponent } from './home.component';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { ComponentFixture, getTestBed, TestBed } from '@angular/core/testing';
-import { Observable, of } from 'rxjs';
+import { AppState } from './../../core/store/app.state';
+import { Pokemon, Types, Version, Abilities, Movies, Stats } from '../../shared/interfaces/pokemon';
 
-import { PokemonService } from '../../core/services/pokemon.service';
-import { SharedModule } from '../../shared/shared.module';
-import { ListComponent } from '../../shared/components/list/list.component';
-import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
-import { Pokemons } from '../../shared/interfaces/pokemons';
-import { Pokemon } from '../../shared/interfaces/pokemon';
-import { FilterComponent } from './../../shared/components/filter/filter.component';
-
-const mockPokemonsArray = [
-  { id: 1, name: 'test', url: ''}
-]
+const mockPokemonsArray = [{ id: 1, name: 'charizard', url: 'https://pokeapi.co/api/v2/pokemon/1/'}]
 
 const mockPokemons  = {
-  count: 123,
-  next: '1',
-  previous: '12',
+  count: 1281,
+  next: 'https://pokeapi.co/api/v2/pokemon?offset=10&limit=10',
+  previous: 'null',
   results: mockPokemonsArray
 }
 
-class MockPokemonService {
-  getPokemons(offset: number, limit: number ): Observable<Pokemons> {
-    return of(mockPokemons)
-  }
+const version: Version[] = [{ name: 'name', url: ''}];
+const types: Types[] = [{ slot: 123 , type: version}]
+const abilities: Abilities[] = [{ abilitie: version, is_hidden: false, slot: 12 }];
+const movies: Movies[] = [{ movie: version, version_group_details: [] }];
+const stats: Stats[]= [{ base_stat: 123, effort: 1, stat: version }];
 
-  getPokemon(id: number): Observable<any> {
-    return of(mockPokemons)
-  }
+const mockPokemon: Pokemon = {
+  abilities: abilities,
+  base_experience:34,
+  height: 12,
+  held_items: [],
+  is_default: true,
+  location_area_encounters: 'area',
+  moves: movies,
+  name: 'charizard',
+  order: 12,
+  past_types: [],
+  species: version,
+  sprites: [{other : { home: { front_default: ''} } }],
+  stats: stats,
+  types: types,
+  weight: 123
 }
 
 describe('HomeComponent', () => {
-  let injector: TestBed;
-  let component: HomeComponent;
-  let fixture: ComponentFixture<HomeComponent>;
-  let pokemonService: PokemonService;
-  let store: MockStore;
-
-  const initialState = {
-    pokemonsList: [],
-    pagesSearched: [1]
-  };
-
-  beforeEach(async () => {
-    TestBed.configureTestingModule({
-      imports: [
-        SharedModule,
-        ListComponent,
-        PaginationComponent,
-        FilterComponent
-      ],
-      providers: [
-        provideMockStore({ initialState }),
-        { provide: PokemonService, useClass: MockPokemonService}
-      ]
-    })
-  });
+  let fixture: HomeComponent;
+  let mockPokemonService: any;
+  let storeSpy: any;
 
   beforeEach(() => {
-    injector = getTestBed();
-    fixture = TestBed.createComponent(HomeComponent);
-    component = fixture.componentInstance;
-    pokemonService = injector.get(PokemonService);
-    fixture.detectChanges();
-    store = TestBed.inject(MockStore);
+    mockPokemonService = {
+      getPokemons: jest.fn(),
+      getPokemon: jest.fn()
+    }
+    storeSpy = {
+      dispatch: jest.fn()
+    }
+
+    fixture = new HomeComponent( mockPokemonService, storeSpy );
+
+    fixture.oldList = [{
+      id: 1,
+      name: 'charizard',
+      photoUrl: 'https://pokeapi.co/api/v2/pokemon/1/',
+      favorite: true,
+      commentary: ''}]
+
+    jest.spyOn(mockPokemonService, 'getPokemons').mockReturnValue((of(mockPokemons)));
+    jest.spyOn(mockPokemonService, 'getPokemon').mockReturnValue((of(mockPokemon)));
+
+    fixture.ngOnInit();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(fixture).toBeTruthy();
+  });
+
+
+  it('should test when searched is trigger with value', () => {
+    fixture.searched('cha');
+
+    expect(fixture.collectionSize).toBeGreaterThan(0);
+  });
+
+  it('should test when searched is trigger without value', () => {
+    fixture.searched('');
+
+    expect(fixture.collectionSize).toBe(1281);
+  });
+
+  it('should test when pagination is 1', () => {
+    const getPokemonList = jest.spyOn(fixture, 'getPokemonList')
+    fixture.pagination(1);
+
+    expect(getPokemonList).toHaveBeenCalled();
+  });
+
+  it('should test when pagination is 2', () => {
+    const getPokemonList = jest.spyOn(fixture, 'getPokemonList')
+    fixture.pagination(2);
+
+    expect(getPokemonList).toHaveBeenCalled();
+  });
+
+  it('should test when pagination is equals of bigger than 3', () => {
+    const getPokemonList = jest.spyOn(fixture, 'getPokemonList')
+    fixture.pagination(3);
+
+    expect(getPokemonList).toHaveBeenCalled();
   });
 });
 

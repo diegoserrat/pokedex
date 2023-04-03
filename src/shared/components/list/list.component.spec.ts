@@ -1,48 +1,41 @@
-import { CommonModule } from '@angular/common';
-import { ComponentFixture, getTestBed, TestBed } from '@angular/core/testing';
-import { Store, StoreModule } from '@ngrx/store';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { BtnAddComponent } from '../btn-add/btn-add.component';
-import { BtnRemoveComponent } from '../btn-remove/btn-remove.component';
-import { FavoriteComponent } from '../favorite/favorite.component';
-
 import { ListComponent } from './list.component';
 
 describe('ListComponent', () => {
-  let injector: TestBed;
-  let component: ListComponent;
-  let fixture: ComponentFixture<ListComponent>;
-
-  let store: MockStore;
-  const initialState = {
-    pokemonsList: [],
-    pagesSearched: [1]
-  };
-
-  beforeEach(async () => {
-    TestBed.configureTestingModule({
-      imports: [
-        CommonModule,
-        ListComponent,
-        BtnAddComponent,
-        BtnRemoveComponent,
-        FavoriteComponent
-      ],
-      providers: [
-        provideMockStore({ initialState }),
-      ]
-    })
-  });
+  let fixture: ListComponent;
+  let storeSpy: any;
 
   beforeEach(() => {
-    injector = getTestBed();
-    fixture = TestBed.createComponent(ListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-    store = TestBed.inject(MockStore);
+    storeSpy = {
+      dispatch: jest.fn()
+    }
+
+    fixture = new ListComponent(storeSpy)
+
+    fixture.listItem = [ {
+      id: 1,
+      name: 'charizard',
+      photoUrl: '',
+      favorite: true,
+      commentary: ''
+    }]
+
+    fixture.pokemonsListFavorite = [{
+      id: 1,
+      name: 'charizard',
+      photoUrl: '',
+      favorite: true,
+      commentary: ''
+    }]
   });
 
-  it('should create', () => {
+  test('should create', () => {
     expect(fixture).toBeTruthy();
   });
+
+  test('should test if clickdFavorite was clicked', () => {
+    const object = { id: 1, name: 'charizard', photoUrl: '', favorite: false, commentary: '' }
+    fixture.clickedFavorite(1);
+
+    expect(fixture.listItem[0]).toMatchObject(object);
+  })
 });

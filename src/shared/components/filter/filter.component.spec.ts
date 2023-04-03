@@ -3,8 +3,12 @@ import { FilterComponent } from './filter.component';
 describe('FilterComponent', () => {
   let fixture: FilterComponent
 
-  beforeEach(async () => {
+  beforeEach(() => {
     fixture = new FilterComponent()
+
+    fixture.form.patchValue({searched: 'cha'})
+
+    fixture.ngOnInit();
   });
 
   it('should create', () => {

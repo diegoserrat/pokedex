@@ -60,4 +60,5 @@ export class RemoveCommentaryComponent {
     this.store.dispatch(favoriteOrComment.updateFavoriteorcomment({content: this.pokemonsList}));
     this.activeModal.close()
   }
+
 }

@@ -1,29 +1,15 @@
 import { BtnAddComponent } from './btn-add.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ComponentFixture, getTestBed, TestBed } from '@angular/core/testing';
-import { SharedModule } from '../../shared.module';
 
 describe('BtnAddComponent', () => {
-  let injector: TestBed;
-  let component: BtnAddComponent;
-  let fixture: ComponentFixture<BtnAddComponent>;
-
-  beforeEach(async () => {
-    TestBed.configureTestingModule({
-      imports: [
-        SharedModule
-      ],
-      providers: [
-        NgbModal
-      ]
-    })
-  });
+  let fixture: BtnAddComponent
+  let modalServiceSpy: any;
 
   beforeEach(() => {
-    injector = getTestBed();
-    fixture = TestBed.createComponent(BtnAddComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    modalServiceSpy = {
+      open: jest.fn()
+    }
+
+    fixture = new BtnAddComponent(modalServiceSpy)
   });
 
   it('should create', () => {

@@ -1,43 +1,44 @@
+import { AppState } from './../../../core/store/app.state';
 import { SharedModule } from './../../shared.module';
 import { ComponentFixture, getTestBed, TestBed } from '@angular/core/testing';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
-
 import { AddCommentaryComponent } from './add-commentary.component';
 
 describe('AddCommentaryComponent', () => {
-  let injector: TestBed;
-  let component: AddCommentaryComponent;
-  let fixture: ComponentFixture<AddCommentaryComponent>;
-
-  let store: MockStore;
-  const initialState = {
-    pokemonsList: [],
-    pagesSearched: [1]
-  };
-
-  beforeEach(async () => {
-    TestBed.configureTestingModule({
-      imports: [
-        SharedModule,
-      ],
-      providers: [
-        provideMockStore({ initialState }),
-        NgbActiveModal
-      ]
-    })
-  });
+  let fixture: AddCommentaryComponent
+  let modalServiceSpy: any;
+  let storeSpy: any;
 
   beforeEach(() => {
-    injector = getTestBed();
-    fixture = TestBed.createComponent(AddCommentaryComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-    store = TestBed.inject(MockStore);
+    storeSpy = {
+      dispatch: jest.fn(),
+      pipe: jest.fn()
+    }
+
+    modalServiceSpy = {
+      close: jest.fn()
+    }
+
+    fixture = new AddCommentaryComponent(modalServiceSpy, storeSpy)
+
+    fixture.form.patchValue({
+      commentary: 'nice',
+      name: 'charizard'
+    })
+
+    fixture.pokemonsList = [{ id: 1, name: 'charizard', photoUrl: '', favorite: false, commentary: 'test' }];
+    fixture.id = 1;
   });
 
-  it('should create', () => {
+
+  test('should create', () => {
     expect(fixture).toBeTruthy();
   });
+
+  test('should call save and update pokemonsList', () => {
+    fixture.save();
+
+    expect(fixture.pokemonsList[0].commentary).toBe('nice');
+  })
 });

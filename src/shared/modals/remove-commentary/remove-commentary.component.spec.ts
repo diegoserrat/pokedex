@@ -1,43 +1,33 @@
-import { Store } from '@ngrx/store';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
-import { SharedModule } from './../../shared.module';
 import { RemoveCommentaryComponent } from './remove-commentary.component';
-import { ComponentFixture, getTestBed, TestBed } from '@angular/core/testing';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
 describe('RemoveCommentaryComponent', () => {
-  let injector: TestBed;
-  let component: RemoveCommentaryComponent;
-  let fixture: ComponentFixture<RemoveCommentaryComponent>;
-
-  let store: MockStore;
-  const initialState = {
-    pokemonsList: [],
-    pagesSearched: [1]
-  };
-
-  beforeEach(async () => {
-    TestBed.configureTestingModule({
-      imports: [
-        SharedModule,
-      ],
-      providers: [
-        provideMockStore({ initialState }),
-        NgbActiveModal
-      ]
-    })
-  });
+  let fixture: RemoveCommentaryComponent
+  let activeModalSpy: any;
+  let storeSpy: any
 
   beforeEach(() => {
-    injector = getTestBed();
-    fixture = TestBed.createComponent(RemoveCommentaryComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-    store = TestBed.inject(MockStore);
+    storeSpy = {
+      dispatch: jest.fn(),
+      pipe: jest.fn()
+    }
+
+    activeModalSpy = {
+      close: jest.fn()
+    }
+
+    fixture = new RemoveCommentaryComponent(activeModalSpy, storeSpy)
+
+    fixture.pokemonsList = [{ id: 1, name: 'charizard', photoUrl: '', favorite: false, commentary: 'test' }];
+    fixture.id = 1;
   });
 
-  it('should create', () => {
+  test('should create', () => {
     expect(fixture).toBeTruthy();
   });
+
+  test('should call save and update pokemonsList', () => {
+    fixture.exclude();
+
+    expect(fixture.pokemonsList[0].commentary).toBe('');
+  })
 });

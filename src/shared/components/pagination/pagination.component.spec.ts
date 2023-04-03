@@ -1,42 +1,27 @@
-import { SharedModule } from './../../shared.module';
-import { ComponentFixture, getTestBed, TestBed } from '@angular/core/testing';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
-
 import { PaginationComponent } from './pagination.component';
-import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('PaginationComponent', () => {
-  let injector: TestBed;
-  let component: PaginationComponent;
-  let fixture: ComponentFixture<PaginationComponent>;
-
-  let store: MockStore;
-  const initialState = {
-    pokemonsList: [],
-    pagesSearched: [1]
-  };
-
-  beforeEach(async () => {
-    TestBed.configureTestingModule({
-      imports: [
-        SharedModule,
-        NgbPaginationModule
-      ],
-      providers: [
-        provideMockStore({ initialState }),
-      ]
-    })
-  });
+  let fixture: PaginationComponent;
+  let storeSpy: any;
 
   beforeEach(() => {
-    injector = getTestBed();
-    fixture = TestBed.createComponent(PaginationComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-    store = TestBed.inject(MockStore);
+    storeSpy = {
+      dispatch: jest.fn()
+    }
+
+    fixture = new PaginationComponent(storeSpy)
+
+    fixture.pageList = [1];
   });
 
-  it('should create', () => {
+  test('should create', () => {
     expect(fixture).toBeTruthy();
   });
+
+  test('should add a new page to pageList', () => {
+    const arrayList = [1, 2];
+    fixture.pageChange(2);
+
+    expect(fixture.pageList).toMatchObject(arrayList);
+  })
 });

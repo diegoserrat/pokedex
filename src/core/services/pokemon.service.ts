@@ -22,9 +22,4 @@ export class PokemonService {
   getPokemon(id: number): Observable<Pokemon> {
     return this.http.get<Pokemon>(`${environment.pokemon}/pokemon/${id}`);
   }
-
-  getFilteredPokemons(): Observable<Pokemons> {
-    const params = { offset: 0, limit: 1281 };
-    return this.http.get<Pokemons>(`${environment.pokemon}/pokemon`, { params });
-  }
 }
