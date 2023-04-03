@@ -25,6 +25,7 @@ export class BtnAddComponent {
 
   @Input() text = 'default';
   @Input() pokemon: PokemonsList = { id: 0, commentary: '', favorite: false, name: '', photoUrl: ''};
+  @Input() pokemonList: PokemonsList[] = [];
 
   constructor(private modalService: NgbModal) {}
 

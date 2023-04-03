@@ -7,37 +7,18 @@ import { ComponentFixture, getTestBed, TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
 describe('RemoveCommentaryComponent', () => {
-  let injector: TestBed;
-  let component: RemoveCommentaryComponent;
-  let fixture: ComponentFixture<RemoveCommentaryComponent>;
-
-  let store: MockStore;
-  const initialState = {
+  let fixture: RemoveCommentaryComponent
+  let activeModal: NgbActiveModal;
+  let store: Store<{app: {
     pokemonsList: [],
     pagesSearched: [1]
-  };
-
-  beforeEach(async () => {
-    TestBed.configureTestingModule({
-      imports: [
-        SharedModule,
-      ],
-      providers: [
-        provideMockStore({ initialState }),
-        NgbActiveModal
-      ]
-    })
-  });
+  }}>;
 
   beforeEach(() => {
-    injector = getTestBed();
-    fixture = TestBed.createComponent(RemoveCommentaryComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-    store = TestBed.inject(MockStore);
+    fixture = new RemoveCommentaryComponent(activeModal, store)
   });
 
-  it('should create', () => {
+  test('should create', () => {
     expect(fixture).toBeTruthy();
   });
 });

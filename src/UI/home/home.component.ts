@@ -36,6 +36,7 @@ import { RouterModule } from '@angular/router';
           class="w-100"
           [listItem]="list"
           [page]="page"
+          [pokemonsListFavorite]="oldList"
           />
         <pkm-pagination
           [collectionSize]="collectionSize"

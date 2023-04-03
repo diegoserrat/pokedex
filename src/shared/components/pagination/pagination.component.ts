@@ -25,14 +25,12 @@ import { SharedModule } from '../../shared.module';
   `,
   styleUrls: ['./pagination.component.scss']
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent {
   @Input() collectionSize = 0;
   @Input() pageList: number[] = [];
   @Output() page = new EventEmitter<number>()
 
-  constructor(private store: Store<{app: AppState}>){}
-
-  ngOnInit(): void {}
+  constructor(private store: Store){}
 
   pageChange(page: number) {
     this.pageList.forEach( (pg, index, array) => {

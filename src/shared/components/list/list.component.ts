@@ -54,17 +54,13 @@ import { PokemonsList } from '../../interfaces/pokemons-list';
     </div>
   `
 })
-export class ListComponent implements OnChanges {
+export class ListComponent {
 
   @Input() listItem: PokemonsList[] = [];
   @Input() page = 0;
-  pokemonsListFavorite: PokemonsList[] = [];
+  @Input() pokemonsListFavorite: PokemonsList[] = [];
 
-  constructor( private store: Store<{app: AppState}> ){
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.store.pipe(select('app')).subscribe( s => this.pokemonsListFavorite = s.pokemonsList);
+  constructor( private store: Store){
   }
 
   clickedFavorite(id: number) {

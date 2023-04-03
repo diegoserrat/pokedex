@@ -3,7 +3,7 @@ import { FavoriteComponent } from './favorite.component';
 describe('FavoriteComponent', () => {
   let fixture: FavoriteComponent;
 
-  beforeEach(async () => {
+  beforeEach(() => {
     fixture = new FavoriteComponent()
   });
 

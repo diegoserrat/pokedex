@@ -1,29 +1,24 @@
 import { BtnAddComponent } from './btn-add.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ComponentFixture, getTestBed, TestBed } from '@angular/core/testing';
-import { SharedModule } from '../../shared.module';
+
+export class MockNgbModalRef {
+  componentInstance = { pokemon: {
+    id: 1,
+    name: 'charizard',
+    photoUrl: 'string',
+    favorite: false,
+    commentary: ''
+  }};
+  result: Promise<any> = new Promise((resolve, reject) => resolve(true));
+}
 
 describe('BtnAddComponent', () => {
-  let injector: TestBed;
-  let component: BtnAddComponent;
-  let fixture: ComponentFixture<BtnAddComponent>;
-
-  beforeEach(async () => {
-    TestBed.configureTestingModule({
-      imports: [
-        SharedModule
-      ],
-      providers: [
-        NgbModal
-      ]
-    })
-  });
+  let fixture: BtnAddComponent
+  let modalService: NgbModal;
+  let mockModalRef: MockNgbModalRef = new MockNgbModalRef();
 
   beforeEach(() => {
-    injector = getTestBed();
-    fixture = TestBed.createComponent(BtnAddComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    fixture = new BtnAddComponent(modalService)
   });
 
   it('should create', () => {

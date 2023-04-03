@@ -4,27 +4,25 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { BtnRemoveComponent } from './btn-remove.component';
 
-describe('BtnRemoveComponent', () => {
-  let injector: TestBed;
-  let component: BtnRemoveComponent;
-  let fixture: ComponentFixture<BtnRemoveComponent>;
+export class MockNgbModalRef {
+  componentInstance = { pokemon: {
+    id: 1,
+    name: 'charizard',
+    photoUrl: 'string',
+    favorite: false,
+    commentary: ''
+  }};
+  result: Promise<any> = new Promise((resolve, reject) => resolve(true));
+}
 
-  beforeEach(async () => {
-    TestBed.configureTestingModule({
-      imports: [
-        SharedModule
-      ],
-      providers: [
-        NgbModal
-      ]
-    })
-  });
+describe('BtnRemoveComponent', () => {
+  let fixture: BtnRemoveComponent
+  let activeModal: NgbModal;
+  let mockModalRef: MockNgbModalRef = new MockNgbModalRef();
+
 
   beforeEach(() => {
-    injector = getTestBed();
-    fixture = TestBed.createComponent(BtnRemoveComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    fixture = new BtnRemoveComponent(activeModal)
   });
 
   it('should create', () => {
