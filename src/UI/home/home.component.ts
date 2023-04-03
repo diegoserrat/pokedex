@@ -61,8 +61,14 @@ export class HomeComponent implements OnInit {
     this.getPokemonList();
   }
 
-  searched(event: string) {
-    this.list = this.oldList.filter( pokemon => pokemon.name.includes(event));
+  searched(search: string) {
+    if (search.length) {
+      this.list = this.oldList.filter( pokemon => pokemon.name.includes(search))
+      this.collectionSize = this.list.length;
+    } else {
+      this.list = [];
+      this.getPokemonList();
+    }
   }
 
   getPokemonList(offset = 0, limit = 10) {

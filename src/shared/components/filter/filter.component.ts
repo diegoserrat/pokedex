@@ -19,11 +19,11 @@ import { SharedModule } from './../../shared.module';
             class="form-control border-right-0"
             placeholder="Pesquisar pokémon"
             formControlName="searched">
-          <div class="input-group-append">
-            <span class="input-group-text pointer bg-white" id="basic-addon2">
-              <i class="bi bi-search" id="icon"></i>
-            </span>
-          </div>
+            <div class="input-group-append">
+              <span class="input-group-text pointer bg-white" id="basic-addon2">
+                <i class="bi bi-search" id="icon"></i>
+              </span>
+            </div>
         </div>
       </form>
     </div>
