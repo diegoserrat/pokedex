@@ -14,16 +14,20 @@ import { PokemonsList } from '../../interfaces/pokemons-list';
     SharedModule
   ],
   template: `
-      <div class="modal-header bg-light">
-        <h4 class="modal-title" id="modal-basic-title">Adicionar comentário</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
-      </div>
-      <div class="modal-body bg-light">
-        Deseja excluír o comentário {{pokemon.commentary}} do pokemon {{pokemon.name}} ?
-      </div>
-      <div class="modal-footer bg-light">
-        <button type="button" class="btn btn-info" (click)="exclude()">Excluír</button>
-        <button type="button" class="btn btn-info" (click)="activeModal.close()">Sair</button>
+      <div class="d-flex flex-column modal-body bg-light">
+        <div class="d-flex justify-content-between">
+            <h4 class="modal-title" id="modal-basic-title">Remover comentário</h4>
+            <button type="button" class="btn btn-light bg-white border-0" aria-label="Close" (click)="activeModal.dismiss()">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <div class="mt-5">
+          Deseja excluír o comentário {{pokemon.commentary}} do pokemon {{pokemon.name}} ?
+        </div>
+        <div class="d-flex justify-content-end mt-5">
+          <button type="button" class="btn btn-danger mr-3" (click)="exclude()">Excluír</button>
+          <button type="button" class="btn btn-info" (click)="activeModal.close()">Sair</button>
+        </div>
       </div>
   `,
   styleUrls: ['./remove-commentary.component.scss']
@@ -52,8 +56,6 @@ export class RemoveCommentaryComponent {
         pokemon.commentary = '';
       }
     });
-
-    console.log(this.pokemonsList);
 
     this.store.dispatch(favoriteOrComment.updateFavoriteorcomment({content: this.pokemonsList}));
     this.activeModal.close()

@@ -32,7 +32,7 @@ import { PokemonsList } from '../../interfaces/pokemons-list';
               {{pokemon.name}}
             </div>
             <div class="d-flex align-items-end">
-              <div class="bg-warning rounded-pill p-3 pl-4 w-50"> {{pokemon.commentary}} </div>
+              <div class="bg-warning rounded-pill p-3 pl-4 w-50 h-100"> {{pokemon.commentary}} </div>
               <pkm-btn-add
                 [text]="'Adicionar comentário'"
                 [pokemon]="pokemon"/>

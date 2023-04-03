@@ -32,8 +32,8 @@ export class BtnAddComponent {
     const modalRef = this.modalService.open(AddCommentaryComponent, {
       backdrop: false,
       centered: true,
-      modalDialogClass: 'bg-light rounded',
-      size: 'lg'
+      size: 'xl',
+      modalDialogClass: 'rounded dialog-class',
     });
     modalRef.componentInstance.pokemon = this.pokemon;
   }
