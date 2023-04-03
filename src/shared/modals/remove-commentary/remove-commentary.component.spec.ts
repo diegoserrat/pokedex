@@ -1,6 +1,3 @@
-import { Store } from '@ngrx/store';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
 import { RemoveCommentaryComponent } from './remove-commentary.component';
 
 describe('RemoveCommentaryComponent', () => {

@@ -1,24 +1,15 @@
 import { BtnAddComponent } from './btn-add.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-export class MockNgbModalRef {
-  componentInstance = { pokemon: {
-    id: 1,
-    name: 'charizard',
-    photoUrl: 'string',
-    favorite: false,
-    commentary: ''
-  }};
-  result: Promise<any> = new Promise((resolve, reject) => resolve(true));
-}
 
 describe('BtnAddComponent', () => {
   let fixture: BtnAddComponent
-  let modalService: NgbModal;
-  let mockModalRef: MockNgbModalRef = new MockNgbModalRef();
+  let modalServiceSpy: any;
 
   beforeEach(() => {
-    fixture = new BtnAddComponent(modalService)
+    modalServiceSpy = {
+      open: jest.fn()
+    }
+
+    fixture = new BtnAddComponent(modalServiceSpy)
   });
 
   it('should create', () => {

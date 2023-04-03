@@ -1,9 +1,8 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 
 import { setPagesSearched } from '../../../core/store/actions/app.actions';
-import { AppState } from '../../../core/store/app.state';
 import { SharedModule } from '../../shared.module';
 
 @Component({
