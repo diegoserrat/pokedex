@@ -1,4 +1,8 @@
-import { MockStore} from '@ngrx/store/testing';
+import { appReducer } from './../../../core/store/reducers/app.reducer';
+import { TestBed, } from '@angular/core/testing';
+import { StoreModule } from '@ngrx/store';
+import { MockStore } from '@ngrx/store/testing';
+import { async } from 'rxjs';
 
 import { ListComponent } from './list.component';
 
@@ -7,6 +11,7 @@ describe('ListComponent', () => {
   let store: MockStore;
 
   beforeEach(() => {
+
     fixture = new ListComponent(store)
 
     fixture.listItem = [ {
@@ -24,6 +29,8 @@ describe('ListComponent', () => {
       favorite: true,
       commentary: ''
     }]
+
+    console.log(store);
   });
 
   test('should create', () => {
